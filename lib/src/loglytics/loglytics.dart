@@ -76,7 +76,7 @@ mixin Loglytics<D extends Analytics> {
   /// Use the [analyticsInterface] and [crashReportsInterface] to specify your implementations
   /// of both functionalities. This is optional as the [Loglytics] can also be used as a pure logger.
   /// Populate the [analytics] parameter with callbacks to your [Analytics] implementations.
-  /// Example: [() => CounterAnalytics(), () => CookieAnalytics()].
+  /// Example: `[() => CounterAnalytics(), () => CookieAnalytics()]`.
   static void setUp({
     bool logTime = false,
     LogLevel logLevel = LogLevel.info,
