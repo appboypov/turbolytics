@@ -1,6 +1,6 @@
 name: turbolytics
 description: An efficient, user-friendly way to implement logs, analytics and crash reports into your projects.
-version: 1.0.0
+version: 1.1.0
 resolution: workspace
 homepage: https://github.com/codaveto/turbolytics
 

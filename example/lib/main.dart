@@ -6,7 +6,7 @@ import 'implementations/analytics_implementation.dart';
 import 'implementations/crash_reports_implementation.dart';
 
 void main() {
-  Loglytics.setUp(
+  Turbolytics.setUp(
     analyticsInterface: AnalyticsImplementation(Object()),
     crashReportsInterface: CrashReportsImplementation(Object()),
     analytics: (analyticsFactory) {
@@ -16,7 +16,7 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget with Loglytics {
+class MyApp extends StatelessWidget with Turbolytics {
   MyApp({Key? key}) : super(key: key);
 
   @override
@@ -38,23 +38,23 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   late final Log log = Log(location: runtimeType.toString());
-  late final Loglytics<CounterAnalytics> loglytics =
-      Loglytics.create<CounterAnalytics>(location: runtimeType.toString());
+  late final Turbolytics<CounterAnalytics> turbolytics =
+      Turbolytics.create<CounterAnalytics>(location: runtimeType.toString());
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage>
-    with Loglytics<CounterAnalytics> {
+    with Turbolytics<CounterAnalytics> {
   int _counter = 0;
 
   @override
   void initState() {
     widget.log.info('Test the individual logger one two three');
-    widget.loglytics.log.info('Test the individual loglytics one two three');
-    widget.loglytics.analytics.service.changed(subject: 'nothing');
-    widget.loglytics.analytics.service
+    widget.turbolytics.log.info('Test the individual turbolytics one two three');
+    widget.turbolytics.analytics.service.changed(subject: 'nothing');
+    widget.turbolytics.analytics.service
         .userProperty(property: 'this', value: 'is_so_cool');
     analytics.viewPage();
     super.initState();

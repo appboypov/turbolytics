@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'analytics.dart';
 
-/// Used to register analytics objects via the [Loglytics.setUp] method.
+/// Used to register analytics objects via the [Turbolytics.setUp] method.
 @protected
 class AnalyticsFactory {
   const AnalyticsFactory({

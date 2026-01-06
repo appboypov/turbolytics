@@ -1,4 +1,4 @@
-part of '../loglytics/loglytics.dart';
+part of '../turbolytics/turbolytics.dart';
 
 /// Pure logger class to facilitate logging.
 class Log {
@@ -16,7 +16,7 @@ class Log {
   /// Used to toggle logging of time on or off.
   static bool logTime = false;
 
-  /// Used to set the log level of the [Loglytics].
+  /// Used to set the log level of the [Turbolytics].
   static LogLevel level = LogLevel.info;
 
   /// Used to indicate the current location of the log.
@@ -44,7 +44,7 @@ class Log {
   /// Logs a trace [message] with [LogLevel.trace] default as [debugPrint].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void trace(
     String message, {
     bool addToCrashReports = true,
@@ -65,7 +65,7 @@ class Log {
   /// Logs a debug [message] with [LogLevel.debug] as [debugPrint].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void debug(
     String message, {
     bool addToCrashReports = true,
@@ -85,7 +85,7 @@ class Log {
   /// Logs an info [message] with [LogLevel.info] default as [debugPrint].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void info(
     String message, {
     bool addToCrashReports = true,
@@ -106,7 +106,7 @@ class Log {
   /// Logs an analytic [name] with [LogLevel.analytic] as [debugPrint].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void analytic({
     required String name,
     String? value,
@@ -132,7 +132,7 @@ class Log {
   /// Logs a warning [message] with [LogLevel.warning] as [debugPrint].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void warning(
     String message, {
     bool addToCrashReports = true,
@@ -154,7 +154,7 @@ class Log {
   ///
   /// Also tries to send the log with optional [error], [stackTrace] and [fatal] boolean to your
   /// [CrashReportsInterface] implementation should you have configured one with the
-  /// [Loglytics.setUp] method.
+  /// [Turbolytics.setUp] method.
   void error(
     String message, {
     String? location,
@@ -180,7 +180,7 @@ class Log {
     final hasError = error != null;
     if (hasError || forceRecordError) {
       _eventBus.tryAddCrashReport(
-        Loglytics._crashReportsInterface?.recordError(
+        Turbolytics._crashReportsInterface?.recordError(
           error,
           localStackTrace,
           fatal: fatal,
@@ -215,7 +215,7 @@ class Log {
   ///
   /// Also tries to send the log with optional [error], [stackTrace] and [fatal] boolean to your
   /// [CrashReportsInterface] implementation should you have configured one with the
-  /// [Loglytics.setUp] method.
+  /// [Turbolytics.setUp] method.
   void fatal(
     String message, {
     String? location,
@@ -243,7 +243,7 @@ class Log {
   /// Used under the hood to log a [message] with [logLevel].
   ///
   /// Also tries to send the log to your [CrashReportsInterface] implementation should you have
-  /// configured one with the [Loglytics.setUp] method.
+  /// configured one with the [Turbolytics.setUp] method.
   void _logMessage({
     required String message,
     required LogLevel logLevel,
@@ -273,8 +273,8 @@ class Log {
     String? tag,
   ) =>
       _eventBus.tryAddCrashReport(
-        Loglytics._crashReportsInterface?.log(
-          '${Loglytics._crashReportType.parseLogLevel(location: _location, logLevel: logLevel)} '
+        Turbolytics._crashReportsInterface?.log(
+          '${Turbolytics._crashReportType.parseLogLevel(location: _location, logLevel: logLevel)} '
           '${tag != null ? '[$tag] ' : ''}'
           '$message',
         ),

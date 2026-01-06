@@ -13,5 +13,5 @@ export 'src/enums/log_level.dart';
 export 'src/enums/crash_report_type.dart';
 // src/extensions
 export 'src/extensions/log_type_extensions.dart';
-// src/loglytics
-export 'src/loglytics/loglytics.dart';
+// src/turbolytics
+export 'src/turbolytics/turbolytics.dart';

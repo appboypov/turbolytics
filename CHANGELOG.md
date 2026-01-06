@@ -5,13 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-01-XX
+
+### Changed
+- **BREAKING**: Renamed `Loglytics<D>` mixin → `Turbolytics<D>` for consistency with package naming
+- **BREAKING**: Renamed `_Loglytics<X>` class → `_Turbolytics<X>` for consistency with package naming
+- Renamed folder `lib/src/loglytics/` → `lib/src/turbolytics/`
+- Updated all documentation, examples, and references to use new class names
+
+### Migration Guide
+To migrate from v1.0.0 to v1.1.0:
+- Replace `with Loglytics` with `with Turbolytics` in all mixin declarations
+- Replace `Loglytics.setUp()` with `Turbolytics.setUp()` in setup code
+- Replace `Loglytics.create()` with `Turbolytics.create()` in factory usage
+- Update variable names from `loglytics` to `turbolytics` if used
+
 ## [1.0.0] - 2025-01-06
 
 ### Added
 - Complete logging, analytics and crash reporting solution
 - Integration with Firebase Analytics and Firebase Crashlytics
 - Feature-based analytics organization with subjects and parameters
-- `Loglytics` mixin for easy integration
+- `Turbolytics` mixin for easy integration
 - `Log` class for standalone logging
 - `AnalyticsService` for analytics operations
 - `EventBus` for chronological event handling
@@ -38,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed EventBus stream handling
-- Fixed Loglytics.create return type
+- Fixed Turbolytics.create return type
 - Fixed various logging and crash reporting issues
 - Fixed stack trace printing
 - Fixed equality checks

@@ -6,7 +6,7 @@ In addition to facilitating easier logging and sending of analytics, Turbolytics
 
 # **🔎 How do I start?**
 
-The first thing we need to do is determine if we want to implement custom analytics and/or crash reporting in our project. If we don't, we can still use the `Loglytics` mixin to log and send basic analytics without having to configure anything. If we **do** want to use one or both of them we must implement the `AnalyticsInterface` and `CrashReportsInterface` respectively, so we can pass them along to the `Loglytics.setUp()` method. We will need to call the `Loglytics.setUp()` method before we can send any analytics or crash reports using this package. See below for an example of an implementation of where `FirebaseAnalytics` and `FirebaseCrashlytics` were used. Also notice the callback that is given to the `analytics` parameter. These are needed to facilitate easy access to our implementation of `Analytics` objects. More on `Analytics` objects later.
+The first thing we need to do is determine if we want to implement custom analytics and/or crash reporting in our project. If we don't, we can still use the `Turbolytics` mixin to log and send basic analytics without having to configure anything. If we **do** want to use one or both of them we must implement the `AnalyticsInterface` and `CrashReportsInterface` respectively, so we can pass them along to the `Turbolytics.setUp()` method. We will need to call the `Turbolytics.setUp()` method before we can send any analytics or crash reports using this package. See below for an example of an implementation of where `FirebaseAnalytics` and `FirebaseCrashlytics` were used. Also notice the callback that is given to the `analytics` parameter. These are needed to facilitate easy access to our implementation of `Analytics` objects. More on `Analytics` objects later.
 
 ### **AnalyticsInterface**
 
@@ -89,7 +89,7 @@ class CrashReportsImplementation implements CrashReportsInterface {
 ### **SetUp**
 
 ```dart
-Loglytics.setUp(
+Turbolytics.setUp(
     analyticsInterface: AnalyticsImplementation(Object()),
     crashReportsInterface: CrashReportsImplementation(Object()),
   );
@@ -112,25 +112,24 @@ class LoginAnalytics extends Analytics {
 }
 ```
 
-After having specified the subject and parameter we now have to add the `LoginAnalytics` object to the `Loglytics.setUp` call we mentioned earlier. We do this by registering the object inside the `AnalyticsFactory` via the `registerAnalytic` method. This method takes a callback that's used to provide the `Analytics` using dependency injection and the `get_it` package. Together it should look like a bit like this:
+After having specified the subject and parameter we now have to add the `LoginAnalytics` object to the `Turbolytics.setUp` call we mentioned earlier. We do this by registering the object inside the `AnalyticsFactory` via the `registerAnalytic` method. This method takes a callback that's used to provide the `Analytics` using dependency injection and the `get_it` package. Together it should look like a bit like this:
 
 ```dart
-Loglytics.setUp(
-    analyticsImplementation: AnalyticsImplementation(Object()),
-    crashReportsImplementation: CrashReportsImplementation(Object()),
-    shouldLogAnalytics: true,
+Turbolytics.setUp(
+    analyticsInterface: AnalyticsImplementation(Object()),
+    crashReportsInterface: CrashReportsImplementation(Object()),
     analytics: (analyticsFactory) {
       analyticsFactory.registerAnalytic(() => LoginAnalytics());
     },
 );
 ```
 
-⚠️ *Keep in mind that we use a separate instance of `GetIt` to maintain these callbacks. If your app uses `GetIt` and you reset it every now and then, don’t forget to reset these as well (or choose not to, your choice).*
+⚠️ *Keep in mind that we use a separate instance of `GetIt` to maintain these callbacks. If your app uses `GetIt` and you reset it every now and then, don't forget to reset these as well (or choose not to, your choice).*
 
-Now we can move on to our fist usage of a `Loglytics` `mixin`. We use the name of the login `Analytics` implementation we just made as a generic argument for the `Loglytics` `mixin`. This looks like the following:
+Now we can move on to our fist usage of a `Turbolytics` `mixin`. We use the name of the login `Analytics` implementation we just made as a generic argument for the `Turbolytics` `mixin`. This looks like the following:
 
 ```dart
-class LoginClass with Loglytics<LoginAnalytics> {}
+class LoginClass with Turbolytics<LoginAnalytics> {}
 ```
 
 **💡** *Tip: Comment your Analytics implementations and create a dart doc for your analyst, this way they have an up to date overview of all the analytics that are being sent from within the app!*
@@ -138,7 +137,7 @@ class LoginClass with Loglytics<LoginAnalytics> {}
 That's it, now we have everything at our disposal to log and send analytics for this feature/part of your app. Now when we type in `analytics` and then choose one of the actions we will have all our defined subjects and parameters (for that feature/part of our app) at our disposal in a callback (🆒). Using it could look like this:
 
 ```dart
-class LoginClass with Loglytics<LoginAnalytics> {
+class LoginClass with Turbolytics<LoginAnalytics> {
   
   void initialise() {
     // Other code here
@@ -191,11 +190,11 @@ void _doSomething() {
 
 ## ☝️Using the classes independently
 
-Since version 0.10.0 it is also possible to create the `Log`, `Loglytics` and `AnalyticsService` objects on their own. If you defined a `CrashReportsInterface` or `AnalyticsInterface` in the `Loglytics.setUp` method these will also be sending events to their respective implementations. Defining three classes could look a little something like this:
+Since version 0.10.0 it is also possible to create the `Log`, `Turbolytics` and `AnalyticsService` objects on their own. If you defined a `CrashReportsInterface` or `AnalyticsInterface` in the `Turbolytics.setUp` method these will also be sending events to their respective implementations. Defining three classes could look a little something like this:
 
 ```dart
 class IndividualUsage {
-  late final Loglytics loglytics = Loglytics.create(location: runtimeType.toString());
+  late final Turbolytics turbolytics = Turbolytics.create(location: runtimeType.toString());
   late final Log log = Log(location: runtimeType.toString());
   late final AnalyticsService analyticsService = AnalyticsService();
 }

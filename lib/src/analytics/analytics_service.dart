@@ -1,4 +1,4 @@
-part of '../loglytics/loglytics.dart';
+part of '../turbolytics/turbolytics.dart';
 
 /// Used to provide an easy interface for sending analytics.
 ///
@@ -23,13 +23,13 @@ class AnalyticsService {
   /// This applies to your possible [_analyticsInterface] as well as your
   /// [_crashReportsInterface].
   void userId({required String userId}) {
-    _eventBus.tryAddAnalytic(Loglytics._analyticsInterface?.setUserId(userId));
+    _eventBus.tryAddAnalytic(Turbolytics._analyticsInterface?.setUserId(userId));
     _eventBus.tryAddCrashReport(
-        Loglytics._crashReportsInterface?.setUserIdentifier(userId));
+        Turbolytics._crashReportsInterface?.setUserIdentifier(userId));
     _log?.analytic(
       name: 'user_id',
       value: userId,
-      addToCrashReports: Loglytics._addAnalyticsToCrashReports,
+      addToCrashReports: Turbolytics._addAnalyticsToCrashReports,
     );
   }
 
@@ -39,13 +39,13 @@ class AnalyticsService {
   /// [_crashReportsInterface].
   void userProperty({required String property, required String? value}) {
     _eventBus.tryAddAnalytic(
-      Loglytics._analyticsInterface?.setUserProperty(
+      Turbolytics._analyticsInterface?.setUserProperty(
         name: property,
         value: value,
       ),
     );
     _eventBus.tryAddCrashReport(
-      Loglytics._crashReportsInterface?.setCustomKey(
+      Turbolytics._crashReportsInterface?.setCustomKey(
         property,
         value,
       ),
@@ -53,7 +53,7 @@ class AnalyticsService {
     _log?.analytic(
       name: '[PROPERTY] $property',
       value: value,
-      addToCrashReports: Loglytics._addAnalyticsToCrashReports,
+      addToCrashReports: Turbolytics._addAnalyticsToCrashReports,
     );
   }
 
@@ -1245,16 +1245,16 @@ class AnalyticsService {
   }) {
     final name = subject;
     _eventBus.tryAddAnalytic(
-        Loglytics._analyticsInterface?.setCurrentScreen(name: name));
+        Turbolytics._analyticsInterface?.setCurrentScreen(name: name));
     _log?.analytic(
       name: '[SCREEN] $name',
-      addToCrashReports: Loglytics._addAnalyticsToCrashReports,
+      addToCrashReports: Turbolytics._addAnalyticsToCrashReports,
     );
   }
 
   /// Resets all current analytics data.
   Future<void> resetAnalytics() async =>
-      Loglytics._analyticsInterface?.resetAnalyticsData();
+      Turbolytics._analyticsInterface?.resetAnalyticsData();
 
   /// Resets the [_firstInput] used by [AnalyticsService.input].
   void resetFirstInput() => _firstInput = null;
@@ -1263,12 +1263,12 @@ class AnalyticsService {
   void _logAnalytic(Analytic analytic) {
     final name = analytic.name;
     final parameters = analytic.parameters;
-    _eventBus.tryAddAnalytic(Loglytics._analyticsInterface
+    _eventBus.tryAddAnalytic(Turbolytics._analyticsInterface
         ?.logEvent(name: name, parameters: parameters));
     _log?.analytic(
       name: name,
       parameters: parameters,
-      addToCrashReports: Loglytics._addAnalyticsToCrashReports,
+      addToCrashReports: Turbolytics._addAnalyticsToCrashReports,
     );
   }
 
@@ -1277,7 +1277,7 @@ class AnalyticsService {
     final name = customAnalytic.name;
     final parameters = customAnalytic.parameters;
     _eventBus.tryAddAnalytic(
-      Loglytics._analyticsInterface?.logEvent(
+      Turbolytics._analyticsInterface?.logEvent(
         name: name,
         parameters: parameters,
       ),
@@ -1285,7 +1285,7 @@ class AnalyticsService {
     _log?.analytic(
       name: name,
       parameters: parameters,
-      addToCrashReports: Loglytics._addAnalyticsToCrashReports,
+      addToCrashReports: Turbolytics._addAnalyticsToCrashReports,
     );
   }
 }
