@@ -52,7 +52,8 @@ class _MyHomePageState extends State<MyHomePage>
   @override
   void initState() {
     widget.log.info('Test the individual logger one two three');
-    widget.turbolytics.log.info('Test the individual turbolytics one two three');
+    widget.turbolytics.log
+        .info('Test the individual turbolytics one two three');
     widget.turbolytics.analytics.service.changed(subject: 'nothing');
     widget.turbolytics.analytics.service
         .userProperty(property: 'this', value: 'is_so_cool');

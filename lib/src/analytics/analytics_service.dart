@@ -23,7 +23,8 @@ class AnalyticsService {
   /// This applies to your possible [_analyticsInterface] as well as your
   /// [_crashReportsInterface].
   void userId({required String userId}) {
-    _eventBus.tryAddAnalytic(Turbolytics._analyticsInterface?.setUserId(userId));
+    _eventBus
+        .tryAddAnalytic(Turbolytics._analyticsInterface?.setUserId(userId));
     _eventBus.tryAddCrashReport(
         Turbolytics._crashReportsInterface?.setUserIdentifier(userId));
     _log?.analytic(

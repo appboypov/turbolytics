@@ -28,7 +28,8 @@ mixin Turbolytics<D extends Analytics> {
   static final GetIt _getIt = GetIt.asNewInstance();
 
   // Used to create an instance of Turbolytics when using a mixin is not possible or breaks a const constructor.
-  static Turbolytics<T> create<T extends Analytics>({required String location}) =>
+  static Turbolytics<T> create<T extends Analytics>(
+          {required String location}) =>
       _Turbolytics<T>(
         location: location,
       );
@@ -140,4 +141,3 @@ class _Turbolytics<X extends Analytics> with Turbolytics<X> {
   @override
   String get location => _location;
 }
-
