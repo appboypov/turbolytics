@@ -1,10 +1,11 @@
 name: turbolytics
 description: An efficient, user-friendly way to implement logs, analytics and crash reports into your projects.
 version: 1.0.0
+resolution: workspace
 homepage: https://github.com/codaveto/turbolytics
 
 environment:
-  sdk: ">=3.3.0 <4.0.0"
+  sdk: ">=3.5.0 <4.0.0"
 
 dependencies:
   flutter:
@@ -15,6 +16,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
